@@ -1,4 +1,17 @@
 body {
-  background:black;
-  color:white;
+  background:white;
+  color:black;
 }
+
+button {
+  font-family: "Smooch Sans", sans-serif;
+}
+
+input {
+  font-family: "Smooch Sans", sans-serif;
+}
+
+a {
+  font-family: "Smooch Sans", sans-serif;
+}
+

@@ -16,8 +16,14 @@ const appdata = [
 
 const server = http.createServer( function( request,response ) {
   if( request.method === "GET" ) {
-    handleGet( request, response )    
-  }else if( request.method === "POST" ){
+    if (request.url === "/appData"){
+    response.writeHead(200, { "Content-Type": "application/json" })
+    response.end(JSON.stringify(appdata))
+  }
+    else
+      handleGet( request, response )    
+    }
+  else if( request.method === "POST" ){
     handlePost( request, response ) 
   }
 })
@@ -27,7 +33,8 @@ const handleGet = function( request, response ) {
 
   if( request.url === "/" ) {
     sendFile( response, "public/index.html" )
-  }else{
+  }
+  else{
     sendFile( response, filename )
   }
 }

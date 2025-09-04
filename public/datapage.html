@@ -1,23 +1,20 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <title>CS4241 Assignment 2</title>
+<head>
+    <title>CS4241 Assignment 2 DataPage</title>
     <meta charset="utf-8">
     <script src="js/main.js"></script>
+    <script src="server.improved.js"></script>
     <link rel="stylesheet" href="css/main.css">
-    
-    <!-- get rid of favicon error -->
+
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Smooch+Sans:wght@100..900&display=swap" rel="stylesheet">
-  </head>
-    <body>
-      <form>
-        <input type="text" id="yourname" value="your name here">
-        <button>submit</button>
-      </form>
-      <a href="datapage.html">Look at the data</a>
-    </body>
-</html>
+</head>
+
+<body onload = formTable()>
+    <table id = tableInsert>
+    </table>
+</body>
