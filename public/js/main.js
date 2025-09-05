@@ -7,9 +7,11 @@ const submit = async function( event ) {
   // remains to this day
   event.preventDefault()
   
-  const input = document.querySelector( "#yourname" ),
-        json = { "yourname": input.value },
-        body = JSON.stringify( json )
+  const input = document.querySelector("#yourname").value,
+        fields = input.split(" "),
+        json = { model: fields[0], year: fields[1], mpg: fields[2] }
+        body = JSON.stringify(json)
+
 
   const response = await fetch( "/submit", {
     method:"POST",
@@ -18,7 +20,9 @@ const submit = async function( event ) {
 
   const text = await response.text()
 
-  console.log( "text:", text )
+//  console.log( "text:", text )
+
+formTable();
 
 }
 
@@ -42,22 +46,15 @@ async function formTable() {
 
   for(let i = 0; i < appdata.length; i++){
     tableData = tableData + "<td>" + appdata[i].model + "</td>";
-  }
-
-  tableData = tableData + "</tr><tr>" 
-
-  for(let i = 0; i < appdata.length; i++){
     tableData = tableData + "<td>" + appdata[i].year + "</td>";
-  }
-
-  tableData = tableData + "</tr><tr>" 
-
-  for(let i = 0; i < appdata.length; i++){
     tableData = tableData + "<td>" + appdata[i].mpg + "</td>";
+    if (i === appdata.length -1){
+      tableData = tableData + "</tr>"
+    }
+    else{
+      tableData = tableData + "</tr><tr>"
+    }
   }
-
-  tableData = tableData + "</tr>"
-
 
   element.innerHTML = tableData;
   }
