@@ -26,9 +26,27 @@ formTable();
 
 }
 
+const removeData = async function(event) {
+  event.preventDefault();
+ 
+  const input = document.querySelector("#delete").value,
+        body = Number(input);
+
+  const response = await fetch( "/remove", {
+    method: "DELETE",
+    body
+  })
+
+  formTable();
+}
+
+
 window.onload = function() {
-    const button = document.querySelector("button");
-  button.onclick = submit;
+  formTable()
+    const submitButton = document.getElementById("submitButton");
+  submitButton.onclick = submit;
+    const deleteButton = document.getElementById("deleteButton");
+  deleteButton.onclick = removeData;
 }
 
 async function formTable() {

@@ -26,6 +26,11 @@ const server = http.createServer( function( request,response ) {
   else if( request.method === "POST" ){
     handlePost( request, response ) 
   }
+
+  else if (request.method === "DELETE"){
+    handleDelete(request, response)
+  }
+  
 })
 
 const handleGet = function( request, response ) {
@@ -50,11 +55,32 @@ const handlePost = function( request, response ) {
     
     appdata.push(JSON.parse(dataString));
 
-    console.log(appdata)
-
     response.writeHead( 200, "OK", {"Content-Type": "text/plain" })
     response.end("test")
   })
+}
+
+const handleDelete = function (request, response) {
+
+  let elementToRemove = 0;
+  request.on( "data", function( data ) {
+      elementToRemove = data - 1;
+  })
+  
+  request.on( "end", function() {
+  if (elementToRemove > appdata.length - 1 || elementToRemove < 0){
+    response.writeHead( 200, "OK", {"Remove": "Failed" })
+    response.end("test")
+  }
+  else {
+    appdata.splice(elementToRemove, 1);
+
+    response.writeHead( 200, "OK", {"Remove": "Successful" })
+    response.end("test")
+
+  }
+})
+
 }
 
 const sendFile = function( response, filename ) {
