@@ -1,6 +1,11 @@
 body {
-  background:white;
-  color:black;
+  background:rgb(0, 60, 0);
+  color:whitesmoke;
+}
+
+h1, h2{
+  text-align: center;
+  font-family: "Anton", sans-serif;
 }
 
 button {
@@ -9,9 +14,30 @@ button {
 
 input {
   font-family: "Smooch Sans", sans-serif;
+  height: 30px;
+  width: 300px;
+  font-size: 18px;
 }
 
 a {
   font-family: "Smooch Sans", sans-serif;
 }
+
+table{
+  margin: auto;
+  background-color: black;
+  border: 1px solid white;
+  font-family: "Nova Flat", system-ui;
+}
+
+th, td{
+  border: 1px solid white;
+}
+
+form{
+ margin: 0 auto;
+ width: 300px;
+}
+
+
 

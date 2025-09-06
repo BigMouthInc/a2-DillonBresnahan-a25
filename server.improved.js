@@ -9,10 +9,13 @@ const http = require( "http" ),
       port = 3000
 
 const appdata = [
-  { "model": "toyota", "year": 1999, "mpg": 23 },
-  { "model": "honda", "year": 2004, "mpg": 30 },
-  { "model": "ford", "year": 1987, "mpg": 14} 
+  { "Name": "Dillon", "Age": 20, "#OfPets": 1},
+  { "Name": "Christina", "Age": 45, "#OfPets": 29 },
+  { "Name": "Trip", "Age": 5, "#OfPets": 32} 
 ]
+for (let i = 0; i < appdata.length; i++){
+  appdata[i]["Age/PetRatio"] = appdata[i]["Age"] / appdata[i]["#OfPets"];
+}
 
 const server = http.createServer( function( request,response ) {
   if( request.method === "GET" ) {
@@ -45,6 +48,7 @@ const handleGet = function( request, response ) {
 }
 
 const handlePost = function( request, response ) {
+  if (request.url === "/submit"){
   let dataString = ""
 
   request.on( "data", function( data ) {
@@ -54,11 +58,35 @@ const handlePost = function( request, response ) {
   request.on( "end", function() {
     
     appdata.push(JSON.parse(dataString));
+    appdata[appdata.length - 1]["Age/PetRatio"] = Number(appdata[appdata.length - 1]["Age"]) / Number(appdata[appdata.length - 1]["#OfPets"]);
 
     response.writeHead( 200, "OK", {"Content-Type": "text/plain" })
     response.end("test")
   })
 }
+else if (request.url === "/update") {
+  let updateData = "";
+  request.on("data", function(data){
+    updateData += data;
+  })
+  request.on("end", function(){
+  const { index, field, value } = JSON.parse(updateData);
+   if (index > appdata.length || index <= 0) {
+    response.writeHead(200, "OK", {"Content-Type": "data/updateFail"});
+    response.end("test");
+  }
+  if (field === "Age" || field === "#OfPets") {
+    appdata[index - 1][field] = Number(value);
+    appdata[index - 1]["Age/PetRatio"] = Number(appdata[index - 1]["Age"]) / Number(appdata[index - 1]["#OfPets"]);
+  } else {
+    appdata[index - 1][field] = value;
+  }
+  response.writeHead(200, "OK", {"Content-Type": "data/update"});
+  response.end("test");
+  })
+}
+}
+
 
 const handleDelete = function (request, response) {
 
@@ -68,7 +96,7 @@ const handleDelete = function (request, response) {
   })
   
   request.on( "end", function() {
-  if (elementToRemove > appdata.length - 1 || elementToRemove < 0){
+  if (elementToRemove > appdata.length - 1 || elementToRemove <= 0){
     response.writeHead( 200, "OK", {"Remove": "Failed" })
     response.end("test")
   }

@@ -7,9 +7,9 @@ const submit = async function( event ) {
   // remains to this day
   event.preventDefault()
   
-  const input = document.querySelector("#yourname").value,
+  const input = document.querySelector("#entertab").value,
         fields = input.split(" "),
-        json = { model: fields[0], year: fields[1], mpg: fields[2] }
+        json = { "Name": fields[0], "Age": fields[1], "# Of Pets": fields[2] }
         body = JSON.stringify(json)
 
 
@@ -17,12 +17,10 @@ const submit = async function( event ) {
     method:"POST",
     body 
   })
+    
 
-  const text = await response.text()
-
-//  console.log( "text:", text )
-
-formTable();
+  //const text = await response.text()
+ formTable();
 
 }
 
@@ -40,13 +38,30 @@ const removeData = async function(event) {
   formTable();
 }
 
+const editData = async function (event){
+  event.preventDefault();
+  
+  const input = document.querySelector("#update").value,
+        [index, field, value] = input.split(" ");
+        body = JSON.stringify({index, field, value})
+
+  const response = await fetch( "/update", {
+    method:"POST",
+    body 
+  })
+
+  formTable();
+}
+
 
 window.onload = function() {
-  formTable()
+  formTable();
     const submitButton = document.getElementById("submitButton");
   submitButton.onclick = submit;
     const deleteButton = document.getElementById("deleteButton");
   deleteButton.onclick = removeData;
+    const updateButton = document.getElementById("updateButton");
+  updateButton.onclick = editData;
 }
 
 async function formTable() {
@@ -58,14 +73,15 @@ async function formTable() {
 
   let element = document.getElementById("tableInsert");
 
-  var tableData = "<tr> <th>Model</th><th>Year</th><th>MPG</th> </tr>";
+  var tableData = "<tr> <th>Name</th><th>Age</th><th>#OfPets</th><th>Age/PetRatio</th </tr>";
 
   tableData = tableData + "<tr>"
 
   for(let i = 0; i < appdata.length; i++){
-    tableData = tableData + "<td>" + appdata[i].model + "</td>";
-    tableData = tableData + "<td>" + appdata[i].year + "</td>";
-    tableData = tableData + "<td>" + appdata[i].mpg + "</td>";
+    tableData = tableData + "<td>" + appdata[i]["Name"] + "</td>";
+    tableData = tableData + "<td>" + appdata[i]["Age"] + "</td>";
+    tableData = tableData + "<td>" + appdata[i]["#OfPets"] + "</td>";
+    tableData = tableData + "<td>" + appdata[i]["Age/PetRatio"] + "</td>";
     if (i === appdata.length -1){
       tableData = tableData + "</tr>"
     }
@@ -75,6 +91,14 @@ async function formTable() {
   }
 
   element.innerHTML = tableData;
+
+  resetTextBox()
+  }
+
+  function resetTextBox(){
+  let textBox = document.getElementById("entertab");
+
+  textBox.value = "Enter as: Name Age #OfPets";
   }
 
  

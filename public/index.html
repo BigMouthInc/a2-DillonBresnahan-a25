@@ -9,20 +9,47 @@
     <!-- get rid of favicon error -->
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 
+    <!-- Smooch Sans Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Smooch+Sans:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- Anton Font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Smooch+Sans:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- Nova Flat Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Nova+Flat&family=Smooch+Sans:wght@100..900&display=swap" rel="stylesheet">
   </head>
     <body>
+      <h1>
+        Welcome to The Age/Pet Database!!
+      </h1>
+      <h2>
+        Enter Data To Enter
+      </h2>
       <form>
-        <input type="text" id="yourname" value="your name here">
+        <input type="text" id="entertab" value="Enter as: Name Age #OfPets">
         <button id = "submitButton">submit</button>
       </form>
       <table id = tableInsert>
      </table>
+     <h2>
+      Enter Valid Row Number To Delete Data
+     </h2>
       <form>
         <input type="number" id="delete" value="Which row would you liked to delete?">
         <button id = "deleteButton">delete</button>
+      </form>
+      <h2>
+        Edit Data
+      </h2>
+      <form>
+        <input type="text" id="update" value="Enter as: Row#, category, newValue">
+        <button id = "updateButton">update</button>
       </form>
     </body>
 </html>
