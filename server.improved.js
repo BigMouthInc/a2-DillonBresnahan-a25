@@ -71,7 +71,7 @@ else if (request.url === "/update") {
   })
   request.on("end", function(){
   const { index, field, value } = JSON.parse(updateData);
-   if (index > appdata.length || index <= 0) {
+   if (index > appdata.length || index < 0) {
     response.writeHead(200, "OK", {"Content-Type": "data/updateFail"});
     response.end("test");
   }
@@ -96,7 +96,7 @@ const handleDelete = function (request, response) {
   })
   
   request.on( "end", function() {
-  if (elementToRemove > appdata.length - 1 || elementToRemove <= 0){
+  if (elementToRemove > appdata.length - 1 || elementToRemove < 0){
     response.writeHead( 200, "OK", {"Remove": "Failed" })
     response.end("test")
   }

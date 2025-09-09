@@ -9,7 +9,7 @@ const submit = async function( event ) {
   
   const input = document.querySelector("#entertab").value,
         fields = input.split(" "),
-        json = { "Name": fields[0], "Age": fields[1], "# Of Pets": fields[2] }
+        json = { "Name": fields[0], "Age": fields[1], "#OfPets": fields[2] }
         body = JSON.stringify(json)
 
 
@@ -97,8 +97,12 @@ async function formTable() {
 
   function resetTextBox(){
   let textBox = document.getElementById("entertab");
+  let box2 = document.getElementById("delete")
+  let box3 = document.getElementById("update");
 
   textBox.value = "Enter as: Name Age #OfPets";
+  box2.value = "Which row would you liked to delete?"
+  box3.value = "Enter as: Row# category newValue"
   }
 
  
